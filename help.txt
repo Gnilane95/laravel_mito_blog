@@ -1,0 +1,4 @@
+1 - creation des routes dans /route/web.php 
+2 - creation des pages dans resources/views/page 
+3 - création des dossiers de chaque page et de la navbar dans le dossier partials 
+4 - 
