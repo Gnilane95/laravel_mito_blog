@@ -8,6 +8,12 @@ class Testcontroller extends Controller
 {
     public function index()
     {
-        return view('pages.home');
+        $arrs = ["Toto", "Toti"];
+        $arrGames = ["Fifa", "Pepa Pig"];
+        return view('pages.home', compact("arrs", "arrGames"));
+    }
+    public function about()
+    {
+        return view('pages.about');
     }
 }
