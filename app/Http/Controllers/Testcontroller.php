@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Testcontroller extends Controller
 {
     public function index()
     {
-        $arrs = ["Toto", "Toti"];
-        $arrGames = ["Fifa", "Pepa Pig"];
-        return view('pages.home', compact("arrs", "arrGames"));
+        // $posts = Test::all();
+        // $posts = DB::table('tests')->orderBy('name','desc')->get();
+        $posts = Test::get();
+        //dd($posts);
+        return view('pages.home', compact('posts'));
     }
     public function about()
     {

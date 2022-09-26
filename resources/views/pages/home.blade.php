@@ -1,9 +1,7 @@
 <x-layouts.main-layout title="Accueil">
-    <p class="text-xl font-bold text-red-500">Hello world</p>
-    @foreach ($arrs as $arr)
-        <li>{{ $arr }}</li>
-    @endforeach
-    @foreach ($arrGames as $arrGame)
-        <li>{{ $arrGame }}</li>
+    <p class="text-5xl text-center font-bold text-red-500 pb-10">Hello world</p>
+    @foreach ($posts as $post)
+        <p class="text-2xl font-bold">{{ $post->name }}</li>
+        <p>{{ $post->description }}</li>
     @endforeach
 </x-layouts.main-layout>
