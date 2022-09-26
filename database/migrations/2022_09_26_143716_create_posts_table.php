@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->string('url_img')->nullable();
+            $table->boolean('is_published')->default(0);
             $table->timestamps();
         });
     }
@@ -27,5 +31,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('posts');
+        
     }
 };

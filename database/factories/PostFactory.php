@@ -17,7 +17,10 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title'=> fake()->sentence(),
+            'content' => fake()->paragraph(8),
+            'url_img' => fake()->imageUrl(640, 480, 'animals', true),
+            'created_at' => now()
         ];
     }
 }
