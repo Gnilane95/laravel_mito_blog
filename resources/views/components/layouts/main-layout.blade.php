@@ -10,6 +10,7 @@
     @vite('resources/css/app.css')
 </head>
 <body>
+    @include('partials.navbar._navbar')
     @include('partials._session')
     {{ $slot }}
 </body>
