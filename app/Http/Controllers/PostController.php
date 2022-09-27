@@ -15,7 +15,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        //1-Retrieve all post from models Post and saved in variable
+        // $posts = Post::all();
+        $posts = Post::get();
+        // dd($posts);
+        //2-Send data to view
+        return view('pages.home', compact('posts'));
     }
 
     /**

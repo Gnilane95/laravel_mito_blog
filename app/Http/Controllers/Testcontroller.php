@@ -13,8 +13,8 @@ class Testcontroller extends Controller
         // $posts = Test::all();
         // $posts = DB::table('tests')->orderBy('name','desc')->get();
         $posts = Test::get();
-        //dd($posts);
-        return view('pages.home', compact('posts'));
+        // dd($posts);
+        // return view('pages.home', compact('posts'));
     }
     public function about()
     {
