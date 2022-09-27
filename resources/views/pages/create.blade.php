@@ -6,11 +6,16 @@
             @csrf
             <div>
                 {{-- Title --}}
-                <input type="text" name="title" placeholder="Titre du post" id="" class="block w-full rounded-lg border-gray-400">
+                <input type="text" name="title" placeholder="Titre du post" id="" class="block w-full rounded-lg border-gray-400" value="{{ old('title') }}"> 
+                <x-error-msg name="title" />
                 {{-- Content --}}
-                <textarea name="content" id="" cols="30" rows="10" class="mt-5 block w-full rounded-lg border-gray-400 mb-7" placeholder="Votre contenu"></textarea>
+                <textarea name="content" id="" cols="30" rows="10" class="mt-5 block w-full rounded-lg border-gray-400" placeholder="Votre contenu">
+                    {{ old('content') }}
+                </textarea>
+                <x-error-msg name="content" />
+                
                 {{-- Image --}}
-                <input type="text" name="url_img" placeholder="Url de votre image" id="" class="block w-full rounded-lg border-gray-400" value="https://source.unsplash.com/640x480/?person?1">
+                <input type="text" name="url_img" placeholder="Url de votre image" id="" class="block w-full rounded-lg border-gray-400 mt-5" value="https://source.unsplash.com/640x480/?person?1">
                 <button class="btn btn-primary mt-6 w-full"> Ajouter</button>
 
             </div>
