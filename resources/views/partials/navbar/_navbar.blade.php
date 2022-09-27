@@ -1,4 +1,4 @@
-<nav class="shadow-xl flex justify-between p-7 mb-10 text-blue-600">
+<nav class="shadow-xl flex justify-between p-5 mb-10 text-blue-600">
     <div>
         <a href="/" class="font-black text-3xl">MitoBlog</a>
     </div>

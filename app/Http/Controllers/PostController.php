@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         //1-Retrieve all post from models Post and saved in variable
         // $posts = Post::all();
-        $posts = Post::get();
+        $posts = Post::orderBy('created_at','desc')->limit(4)->get();
         // dd($posts);
         //2-Send data to view
         return view('pages.home', compact('posts'));
@@ -41,7 +41,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        // dd($request);
+        // dd($request->all());
         Post::create([
             'title'=>$request->title,
             'content'=>$request->content,
