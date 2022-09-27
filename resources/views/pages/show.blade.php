@@ -3,9 +3,10 @@
         <img src="{{ $post->url_img }}" alt="{{ $post->title }}" class="pb-5 max-w-lg">
         <div>
             <p class="text-3xl font-black pb-10">{{ $post->title }}</p>
-            <p class="max-w-4xl">{{ $post->content }}</p>
-            <div class="pt-6">
+            <p class="max-w-4xl">{!! nl2br(e($post->content)) !!}</p>
+            <div class="pt-6 flex gap-10">
                 <x-btn-delete :post="$post"/>
+                <a href="{{ $post->id }}/edit" class="btn btn-success">Modifier</a>
             </div>
         </div>
     </div>

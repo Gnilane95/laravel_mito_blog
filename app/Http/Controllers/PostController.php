@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         //1-Retrieve all post from models Post and saved in variable
         // $posts = Post::all();
-        $posts = Post::orderBy('created_at','desc')->limit(4)->get();
+        $posts = Post::where('is_published', 1)->orderBy('updated_at','desc')->limit(4)->get();
         // dd($posts);
         //2-Send data to view
         return view('pages.home', compact('posts'));
@@ -44,7 +44,7 @@ class PostController extends Controller
         // dd($request->all());
 
         $request->validate([
-            'title'=>'required|min:5|string|max:180|unique:posts,title',//min 5 characters, max 5 characters
+            'title'=>'required|min:5|string|max:180',//min 5 characters, max 5 characters
             'content'=>'required|min:20|max:350|string',
             'url_img'=>'required',
         ]);
@@ -79,7 +79,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('pages.edit', compact('post'));
     }
 
     /**
@@ -91,7 +91,25 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $published = 0;
+        if($request->has('is_published')){
+            $published = 1;
+        }
+        $request->validate([
+        'title'=>'required|min:5|string|max:180',//min 5 characters, max 5 characters
+        'content'=>'required|min:20|max:350|string',
+        'url_img'=>'required',
+        ]);
+        $post->update([
+            'title'=>$request->title,
+            'content'=>$request->content,
+            'url_img'=>$request->url_img,
+            'is_published'=>$published,
+            'updated_at'=>now()
+        ]) ;
+        return redirect()
+        ->route('home')
+        ->with('status', 'Le post a bien été modifié');
     }
 
     /**
