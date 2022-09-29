@@ -1,17 +1,20 @@
-<x-app-layout>
+@php
+    $styleLink="font-bold hover:text-red-700 hover:underline underline-offset-4 block pb-5 text-blue-700"
+@endphp
+<x-layouts.main-layout title="Dashbord">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
-                </div>
-            </div>
+    <div class="container">
+        <h1 class="uppercase text-xl text-red-700 font-black">
+            Bienvenue {{ Auth::user()->name }} sur ton Dashbord
+        </h1>
+        <div class="py-12">
+            <a href="{{ route('posts.create') }}" class="{{ $styleLink }}">New post</a>
+            <a href="" class="{{ $styleLink }}">La liste des posts</a>
         </div>
     </div>
-</x-app-layout>
+</x-layouts.main-layout>
