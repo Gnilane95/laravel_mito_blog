@@ -16,8 +16,8 @@
                 
                 {{-- Image --}}
                 <div class="">
-                    <label for="">Choisir une image :</label>
-                    <input class="block" type="file" name="url_img" id="">
+                    <label for="url_img">Choisir une image :</label>
+                    <input class="block w-full rounded-lg border-gray-400 mt-5" type="file" name="url_img" id="">
                     <x-error-msg name="url_img" />
                 </div>
                 {{-- <input type="text" name="url_img" placeholder="Url de votre image" id="" class="block w-full rounded-lg border-gray-400 mt-5" value="https://source.unsplash.com/640x480/?person?1"> --}}
