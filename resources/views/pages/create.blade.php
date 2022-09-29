@@ -2,7 +2,7 @@
 
     <div class="container">
         <h1 class="text-center text-indigo-500 font-black text-4xl mb-5">New post</h1>
-        <form action="{{ route('posts.store') }}" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div>
                 {{-- Title --}}
@@ -15,7 +15,12 @@
                 <x-error-msg name="content" />
                 
                 {{-- Image --}}
-                <input type="text" name="url_img" placeholder="Url de votre image" id="" class="block w-full rounded-lg border-gray-400 mt-5" value="https://source.unsplash.com/640x480/?person?1">
+                <div class="">
+                    <label for="">Choisir une image :</label>
+                    <input class="block" type="file" name="url_img" id="">
+                    <x-error-msg name="url_img" />
+                </div>
+                {{-- <input type="text" name="url_img" placeholder="Url de votre image" id="" class="block w-full rounded-lg border-gray-400 mt-5" value="https://source.unsplash.com/640x480/?person?1"> --}}
                 <button class="btn btn-primary mt-6 w-full"> Ajouter</button>
 
             </div>

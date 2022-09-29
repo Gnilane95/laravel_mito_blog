@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         //1-Retrieve all post from models Post and saved in variable
         // $posts = Post::all();
-        $posts = Post::where('is_published', 1)->orderBy('updated_at','desc')->limit(4)->get();
+        $posts = Post::orderBy('updated_at','desc')->paginate(4);
         // dd($posts);
         //2-Send data to view
         return view('pages.home', compact('posts'));

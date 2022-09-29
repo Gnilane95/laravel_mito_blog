@@ -10,6 +10,9 @@
                 <p>Pas d'articles disponibles</p>
             @endforelse
         </div>
+        <div class="my-12 mx-auto flex justify-end">
+            {{ $posts->links('pagination::tailwind') }}
+        </div>
     </div>
 </x-layouts.main-layout>
 
