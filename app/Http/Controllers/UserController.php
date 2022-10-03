@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,6 +14,7 @@ class UserController extends Controller
     */
     public function allUsers()
     {
-        return view('pages.all-users');
+        $users = User::orderBy('updated_at', 'DESC')->paginate(5);
+        return view('pages.all-users', compact('users'));
     }
 }

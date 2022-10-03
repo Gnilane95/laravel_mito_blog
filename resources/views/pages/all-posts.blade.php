@@ -3,4 +3,7 @@
     <div class="container mt-10">
         @include('partials._table-allPosts')
     </div>
+    <div class="mx-56 mt-28 flex justify-end">
+        {{ $posts->links('pagination::tailwind') }}
+    </div>
 </x-layouts.main-layout>
