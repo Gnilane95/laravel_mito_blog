@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth'])->except(['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -142,4 +146,15 @@ class PostController extends Controller
             ->route('home')
             ->with('status', "L'article a bien été supprimé");
     }
+    /**
+     * Return all post view
+     * 
+     * @return void
+     */
+    public function allPosts()
+    {
+        $posts = Post::orderBy('updated_at', 'DESC')->paginate(5) ;
+        return view('pages.all-posts', compact('posts'));
+    }
+    
 }

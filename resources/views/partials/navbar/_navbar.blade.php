@@ -9,12 +9,13 @@
         @guest
             <a href="{{ route('login') }}" class="{{ $styleLink }}">Se connecter</a>
             <a href="{{ route('register') }}" class="{{ $styleLink }}">S'inscrire</a>
-        @endguest
+            @endguest
         @auth
-        <div class="flex justify-center gap-7 items-center">
-            <x-btn-logout/>
-            <p>{{ Auth::user()->name }}</p>
-        </div>
+            <a href="{{ route('dashboard') }}" class="{{ $styleLink }}">Dashbord</a>
+            <div class="flex justify-center gap-7 items-center">
+                <p>{{ Auth::user()->name }}</p>
+                <x-btn-logout/>
+            </div>
         @endauth
     </div>
 </nav>

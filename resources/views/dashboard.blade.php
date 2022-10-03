@@ -14,7 +14,8 @@
         </h1>
         <div class="py-12">
             <a href="{{ route('posts.create') }}" class="{{ $styleLink }}">New post</a>
-            <a href="" class="{{ $styleLink }}">La liste des posts</a>
+            <a href="{{ route('posts.all') }}" class="{{ $styleLink }}">La liste des posts</a>
+            <a href="{{ route('users.all') }}" class="{{ $styleLink }}">La liste des users</a>
         </div>
     </div>
 </x-layouts.main-layout>
