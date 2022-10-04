@@ -129,6 +129,26 @@ class PostController extends Controller
             $published = 1;
         }
 
+        // 1-Verify if user select image or not
+        if($request->has('images')){
+            // 2-Stock all images selected in array
+            $imagesSelected = $request->file('images');
+            // 3- Loop storage each image
+            foreach ($imagesSelected as $image) {
+                // 4-Give a new name for each image
+                $image_name = md5(rand(1000, 10000)). '.' . strtolower($image->extension());
+                // 5-Set uhe passname
+                $path_upload = 'img/images/';
+                $image->move(public_path($path_upload), $image_name);
+
+                Images::create([
+                "slug"=>$path_upload .'/'.$image_name, // posts/images/shhgfythgn.png
+                "created_at"=>now(),
+                "post_id"=> $post->id,
+                ]);
+            }
+        }
+
         //verify if file exist
         //if file exist delete previous img
         if($request->hasFile('url_img')){
@@ -150,6 +170,7 @@ class PostController extends Controller
             'is_published'=>$published,
             'updated_at'=>now()
         ]) ;
+        
         return redirect()
         ->route('home')
         ->with('status', 'Le post a bien été modifié');
@@ -177,6 +198,24 @@ class PostController extends Controller
     {
         $posts = Post::orderBy('updated_at', 'DESC')->paginate(5) ;
         return view('pages.all-posts', compact('posts'));
+    }
+
+    public function removeImg($id)
+    {
+        // 1-Find the real image with his id
+        $image = Images::find($id);
+
+        if(!$image){
+            abort(404);
+        }
+
+        // 2-Delete image in the actually folder
+        unlink(public_path($image->slug));   //public/img/images/hcgyhjsjx.jpg
+        // 3-Delete image from BDD
+        $image->delete();
+
+        // 4- Redirect
+        return back()->with('status',"L'image a bien été supprimée");
     }
     
 }
