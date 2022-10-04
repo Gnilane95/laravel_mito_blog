@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Images;
 use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
@@ -51,18 +52,39 @@ class PostController extends Controller
 
         $request->validate([
             'title'=>'required|min:5|string|max:180',//min 5 characters, max 5 characters
-            'content'=>'required|min:20|max:350|string',
-            'url_img'=>'required|image|mimes:png,jpg,jpeg|max:5000',
+            'content'=>'required|min:20|max:1000|string',
+            'url_img'=>'required|image|mimes:png,jpg,jpeg,webp|max:5000',
         ]);
 
         $validateImg = $request->file('url_img')->store('posts');
 
-        Post::create([
+        $new_post = Post::create([
             'title'=>$request->title,
             'content'=>$request->content,
             'url_img'=>$validateImg,
             'created_at'=>now()
         ]);
+
+        // 1-Verify if user select image or not
+        if($request->has('images')){
+            // 2-Stock all images selected in array
+            $imagesSelected = $request->file('images');
+            // 3- Loop storage each image
+            foreach ($imagesSelected as $image) {
+                // 4-Give a new name for each image
+                $image_name = md5(rand(1000, 10000)). '.' . strtolower($image->extension());
+                // 5-Set uhe passname
+                $path_upload = 'img/images/';
+                $image->move(public_path($path_upload), $image_name);
+
+                Images::create([
+                    "slug"=>$path_upload .'/'.$image_name, // posts/images/shhgfythgn.png
+                    "created_at"=>now(),
+                    "post_id"=> $new_post->id,
+                ]);
+            }
+        }
+
         return redirect()
             ->route('home')
             ->with('status', 'Le post a bien été ajouté');
@@ -118,8 +140,8 @@ class PostController extends Controller
 
         $request->validate([
         'title'=>'required|min:5|string|max:180',//min 5 characters, max 5 characters
-        'content'=>'required|min:20|max:350|string',
-        'url_img'=>'required|image|mimes:png,jpg,jpeg|max:5000',
+        'content'=>'required|min:20|max:1000|string',
+        'url_img'=>'required|image|mimes:png,jpg,jpeg,webp|max:5000',
         ]);
         $post->update([
             'title'=>$request->title,

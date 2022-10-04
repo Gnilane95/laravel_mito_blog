@@ -16,12 +16,17 @@
                 
                 {{-- Image --}}
                 <div class="">
-                    <label for="url_img">Choisir une image :</label>
-                    <input class="block w-full rounded-lg border-gray-400 mt-5" type="file" name="url_img" id="">
+                    <label for="">Image vedette :</label>
+                    <input class="block w-full rounded-lg border-gray-400 mt-5" type="file" name="url_img" id="" >
+                    <x-error-msg name="images" />
+                </div>
+                {{-- Other img --}}
+                <div class="">
+                    <label for="url_img">Others images :</label>
+                    <input class="block w-full rounded-lg border-gray-400 mt-5" type="file" name="images[]" id=""multiple>
                     <x-error-msg name="url_img" />
                 </div>
-                {{-- <input type="text" name="url_img" placeholder="Url de votre image" id="" class="block w-full rounded-lg border-gray-400 mt-5" value="https://source.unsplash.com/640x480/?person?1"> --}}
-                <button class="btn btn-primary mt-6 w-full"> Ajouter</button>
+                <button class="btn btn-primary mt-6 w-full">Ajouter</button>
 
             </div>
         </form>

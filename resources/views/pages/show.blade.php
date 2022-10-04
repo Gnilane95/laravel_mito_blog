@@ -1,6 +1,18 @@
+@php
+    // dd($post->images);
+@endphp
 <x-layouts.main-layout :title="$post->title">
     <div class="container">
-        <img src="{{ asset('storage/'.$post->url_img) }}" alt="{{ $post->title }}" class="pb-5 max-w-lg">
+        <div class="flex space-x-5 mb-10">
+            @if (count($post->images) != 0)
+            <div class="space-y-5 bg-gray-200 p-5">
+                @foreach ($post->images as $image)
+                    <img src="{{ asset($image->slug) }}" alt="" class="w-40">
+                @endforeach
+            </div>
+            @endif
+            <img src="{{ asset('storage/'.$post->url_img) }}" alt="{{ $post->title }}" class="pb-5 max-w-lg">
+        </div>
         <div>
             <p class="text-3xl font-black pb-10">{{ $post->title }}</p>
             <p class="max-w-4xl">{!! nl2br(e($post->content)) !!}</p>
@@ -12,7 +24,7 @@
             @endauth
         </div>
         <div class="my-14 bg-blue-100 p-5">
-            <h2 class="text-3xl font-black pb-5">Conmentaires</h2>
+            <h2 class="text-3xl font-black pb-5">Commentaires</h2>
             @guest
                 <p class="text-center py-6">Connecte toi pour poster un commentaire.</p>
             @endguest
