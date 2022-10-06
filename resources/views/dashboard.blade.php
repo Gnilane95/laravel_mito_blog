@@ -10,13 +10,13 @@
 
     <div class="container">
         <h1 class="uppercase text-xl text-red-700 font-black">
-            Bienvenue {{ Auth::user()->name }} sur ton Dashbord
+            Bienvenue <span class="text-primary-focus underline">{{ Auth::user()->name }}</span> sur ton Dashbord
         </h1>
         <div class="py-12">
             <a href="{{ route('posts.create') }}" class="{{ $styleLink }}">New post</a>
             <a href="{{ route('posts.all') }}" class="{{ $styleLink }}">La liste des posts</a>
             <a href="{{ route('users.all') }}" class="{{ $styleLink }}">La liste des users</a>
-            <a href="" class="{{ $styleLink }}">Gérer les catégories</a>
+            <a href="{{ route('categories.home') }}" class="{{ $styleLink }}">Gérer les catégories</a>
         </div>
     </div>
 </x-layouts.main-layout>
