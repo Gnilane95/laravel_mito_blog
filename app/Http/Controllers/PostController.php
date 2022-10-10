@@ -7,6 +7,8 @@ use App\Models\Images;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
+use App\Models\ListOfCategory;
 
 class PostController extends Controller
 {
@@ -36,7 +38,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('pages.create');
+        $categories = ListOfCategory::all();
+
+        return view('pages.create', compact('categories'));
     }
 
     /**
@@ -54,6 +58,7 @@ class PostController extends Controller
             'title'=>'required|min:5|string|max:180',//min 5 characters, max 5 characters
             'content'=>'required|min:20|max:1000|string',
             'url_img'=>'required|image|mimes:png,jpg,jpeg,webp|max:5000',
+            'category'=>'required'
         ]);
 
         $validateImg = $request->file('url_img')->store('posts');
@@ -84,6 +89,12 @@ class PostController extends Controller
                 ]);
             }
         }
+
+        Category::create([
+            'name'=>$request->category,
+            'post_id'=>$new_post->id,
+            "created_at"=>now()
+        ]);
 
         return redirect()
             ->route('home')
@@ -137,7 +148,7 @@ class PostController extends Controller
             foreach ($imagesSelected as $image) {
                 // 4-Give a new name for each image
                 $image_name = md5(rand(1000, 10000)). '.' . strtolower($image->extension());
-                // 5-Set uhe passname
+                // 5-Set the passname
                 $path_upload = 'img/images/';
                 $image->move(public_path($path_upload), $image_name);
 

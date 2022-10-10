@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('list_of_categories', function (Blueprint $table) {
             $table->id();
             $table->string('category');
+            // $table->foreignID('post_id')->onDelete('cascade');
             $table->timestamps();
         });
     }

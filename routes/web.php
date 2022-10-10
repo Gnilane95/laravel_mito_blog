@@ -15,9 +15,6 @@ Route::resource('posts', PostController::class);
 // Comments
 Route::post('/comment/{id}', [CommentController::class, 'store'])->name('comment.store');
 
-//Category
-
-
 // Group of routes
 
 Route::middleware(['auth'])->prefix('dashboard')->group(function(){
@@ -26,15 +23,21 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function(){
     })->name('dashboard');
     // Category
     Route::get('list-category',[ListOfCategoryController::class, 'index'])->name('categories.home');
-    Route::post('/category', [ListOfCategoryController::class, 'store'])->name('category.store');
+    Route::post('/list-category', [ListOfCategoryController::class, 'store'])->name('category.store');
+    // delete category
+    Route::get('/list-category/delete/{id}',[ListOfCategoryController::class,'delete'])->name('category.delete');
+    // edit category
+    Route::get('/list-category/edit/{id}',[ListOfCategoryController::class,'edit'])->name('category.edit');
+    // update category
+    Route::put('/list-category/update/{id}',[ListOfCategoryController::class,'update'])->name('category.update');
+
     // post
     Route::get('/all-posts', [PostController::class, 'allPosts'])->name('posts.all');
     Route::get('/all-users', [UserController::class, 'allUsers'])->name('users.all');
 
     //delete image post
     Route::get('/posts/remove-img/{id}',[PostController::class, 'removeImg'])->name('delete.img');
-    // delete category
-    
+
 
 });
 

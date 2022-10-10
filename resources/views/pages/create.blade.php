@@ -8,6 +8,18 @@
                 {{-- Title --}}
                 <input type="text" name="title" placeholder="Titre du post" id="" class="block w-full rounded-lg border-gray-400" value="{{ old('title') }}"> 
                 <x-error-msg name="title" />
+                {{-- category --}}
+                <div class="mt-5">
+                    <select name="category" id="" class="select select-bordered w-full max-w-xs">
+                        <option disabled selected value="">Choisir une catégorie</option>
+                        @forelse ($categories as $category)
+                            <option value="{{ $category->category }}">{{ $category->category }}</option>
+                        @empty
+                            <option value="">Pas de categories actuellement</option>
+                        @endforelse
+                    </select>
+                    <x-error-msg name="category" />
+                </div>
                 {{-- Content --}}
                 <textarea name="content" id="" cols="30" rows="10" class="mt-5 block w-full rounded-lg border-gray-400" placeholder="Votre contenu">
                     {{ old('content') }}
